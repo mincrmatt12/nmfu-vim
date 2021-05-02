@@ -2,10 +2,10 @@ if exists("b:current_syntax")
 	finish
 endif
 
-syn keyword nmfuKeyword case loop optional try catch wait finish break
+syn keyword nmfuKeyword case loop optional try catch wait finish break foreach do
 syn keyword nmfuDefWord out parser macro
 syn keyword nmfuOutType str int enum bool
-syn keyword nmfuConstant true false nomatch outofspace else
+syn keyword nmfuConstant true false nomatch outofspace else end
 
 hi def link nmfuKeyword  Statement
 hi def link nmfuDefWord  Define
