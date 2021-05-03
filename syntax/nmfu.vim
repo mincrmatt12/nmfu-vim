@@ -3,7 +3,7 @@ if exists("b:current_syntax")
 endif
 
 syn keyword nmfuKeyword case loop optional try catch wait finish break foreach do
-syn keyword nmfuDefWord out parser macro
+syn keyword nmfuDefWord out parser macro hook
 syn keyword nmfuOutType str int enum bool
 syn keyword nmfuConstant true false nomatch outofspace else end
 
