@@ -2,7 +2,7 @@ if exists("b:current_syntax")
 	finish
 endif
 
-syn keyword nmfuKeyword case loop optional try catch wait finish break foreach do
+syn keyword nmfuKeyword case loop optional try catch wait finish break foreach do match expr
 syn keyword nmfuDefWord out parser macro hook
 syn keyword nmfuOutType str int enum bool
 syn keyword nmfuConstant true false nomatch outofspace else end
@@ -24,8 +24,8 @@ syn match   nmfuOperator "\V="
 hi def link nmfuMathOperator Operator
 hi def link nmfuOperator Operator
 
-syn match nmfuMacroCall "\v\w+(\(\))@="
-syn match nmfuMacroDef  "\v(macro\s*)@<=\w+"
+syn match nmfuMacroCall "\v\w+(\s*\()@="
+syn match nmfuMacroDef  "\v(macro\s*)@<=\w+(\s*\()@="
 
 hi def link nmfuMacroCall Function
 hi def link nmfuMacroDef Function
