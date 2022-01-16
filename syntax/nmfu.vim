@@ -4,7 +4,8 @@ endif
 
 syn keyword nmfuKeyword case loop optional try catch wait finish break foreach do match expr if elif else yield prio
 syn keyword nmfuDefWord out parser macro hook finishcode yieldcode
-syn keyword nmfuConstant true false nomatch outofspace end
+syn keyword nmfuConstant true false
+syn keyword nmfuLiteral nomatch outofspace end
 
 syn region  nmfuOutDecl start="\v(^\s*out)@<=" end="\v[;=]" contains=nmfuOutType,nmfuOutStrLen,nmfuOutIntAttr
 syn region  nmfuOutStrLen start="\v(str)@<=\s*\[" end="]" contains=nmfuNumber contained
@@ -20,7 +21,8 @@ hi def link nmfuOutTypeModifier StorageClass
 
 hi def link nmfuKeyword  Statement
 hi def link nmfuDefWord  Define
-hi def link nmfuConstant Special
+hi def link nmfuConstant Constant
+hi def link nmfuLiteral Special
 
 syn match   nmfuCaseModifier "\vgreedy\s*(case)@="
 
@@ -37,6 +39,7 @@ syn match   nmfuMathOperator "[<>]=\?" contained
 syn match   nmfuMathOperator "\V&" contained
 syn match   nmfuMathOperator "\V|" contained
 syn match   nmfuMathOperator "\V^" contained
+syn match   nmfuMathOperator "\V!" contained
 
 syn match   nmfuOperator "\V+="
 syn match   nmfuOperator "\V="
@@ -47,11 +50,14 @@ hi def link nmfuOperator Operator
 syn match nmfuMacroCall "\v\w+(\s*\()@="
 syn match nmfuMacroDef  "\v(macro\s*)@<=\w+(\s*\()@="
 
-hi def link nmfuMacroCall Function
+hi def link nmfuMacroCall FunctiEndon
 hi def link nmfuMacroDef Function
 
 syn match   nmfuSpecialMath "\v\$\w+" contained
 hi def link nmfuSpecialMath Special
+
+syn match   nmfuMathLength "\v(\w+)@<=\.len" contained
+hi def link nmfuMathLength Type
 
 syn match   nmfuComment "\v//.*$"
 
@@ -60,13 +66,18 @@ hi def link nmfuComment  Comment
 syn match   nmfuNumber  "\v<[0-9]+"
 syn match   nmfuNumber  "\v<0x[0-9a-fA-F]+"
 syn match   nmfuNumber  "\v<0b[0-1]+"
-syn region  nmfuStr	  start=/\v"/ skip=/v\\./ end=/\v"/
 
-syn region  nmfuMathExpr start="\[" end="\]" contains=nmfuNumber,nmfuMathOperator,nmfuSpecialMath
-syn region  nmfuCondition start="\v(if|elif)@<=" end="\v\{@=" contains=nmfuNumber,nmfuMathOperator,nmfuSpecialMath
+syn match   nmfuNumber "\v'(\\.|[^'])'"
+
+hi def link nmfuNumber      Constant
+
+syn region  nmfuStr	  start=/\v"/ skip=/v\\./ end=/\v"[bi]?/
+
+syn region  nmfuMathExpr matchgroup=nmfuMathExprEnd start="\[" end="\]" contains=nmfuNumber,nmfuMathOperator,nmfuSpecialMath,nmfuMathLength,nmfuConstant
+syn region  nmfuCondition start="\v(if|elif)@<=" end="\v\{@=" contains=nmfuNumber,nmfuMathOperator,nmfuSpecialMath,nmfuMathLength,nmfuConstant
 
 syn match   nmfuRegexEscaped  "\v\\[\[.\](){}\\+?*/ ]" contained contains=nmfuRegexEscaper
-syn match   nmfuRegexClass    "\v\\[wWdDsSntr]"  contained contains=nmfuRegexEscaper
+syn match   nmfuRegexClass    "\v\\[wWdDsSntr]"  contained
 syn match   nmfuRegexEscaper  "\v\\" contained
 syn match   nmfuRegexByte     "\v[0-9a-fA-F]{2}"  contained
 syn match   nmfuRegexAny      "\V." contained
@@ -98,9 +109,8 @@ hi def link nmfuRegxOr Operator
 hi def link nmfuRegexEscaper Comment
 hi def link nmfuRegexRepeat Type
 
-hi def link nmfuMathExpr  Statement
+hi def link nmfuMathExprEnd  Statement
 
-hi def link nmfuNumber   Constant
 hi def link nmfuStr 	 String
 
 let b:current_syntax = "nmfu"
