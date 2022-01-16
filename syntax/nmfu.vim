@@ -50,7 +50,7 @@ hi def link nmfuOperator Operator
 syn match nmfuMacroCall "\v\w+(\s*\()@="
 syn match nmfuMacroDef  "\v(macro\s*)@<=\w+(\s*\()@="
 
-hi def link nmfuMacroCall FunctiEndon
+hi def link nmfuMacroCall Function
 hi def link nmfuMacroDef Function
 
 syn match   nmfuSpecialMath "\v\$\w+" contained
